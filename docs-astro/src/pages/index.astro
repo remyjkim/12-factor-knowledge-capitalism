@@ -1,0 +1,94 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import Link from "@components/Link.astro";
+import { HOME } from "@consts";
+
+const allPosts = (await getCollection("blog"))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => a.slug.localeCompare(b.slug));
+
+const sections = [
+  {
+    title: "I. Foundations",
+    factors: allPosts.filter(p => p.slug.startsWith("01-") || p.slug.startsWith("02-"))
+  },
+  {
+    title: "II. The Evolution Interface",
+    factors: allPosts.filter(p => p.slug.startsWith("03-") || p.slug.startsWith("04-"))
+  },
+  {
+    title: "III. The Agency Interface",
+    factors: allPosts.filter(p => p.slug.startsWith("05-") || p.slug.startsWith("06-"))
+  },
+  {
+    title: "IV. The Network Interface",
+    factors: allPosts.filter(p => p.slug.startsWith("07-") || p.slug.startsWith("08-"))
+  },
+  {
+    title: "V. Knowledge Capitalism",
+    factors: allPosts.filter(p =>
+      p.slug.startsWith("09-") ||
+      p.slug.startsWith("10-") ||
+      p.slug.startsWith("11-") ||
+      p.slug.startsWith("12-")
+    )
+  }
+];
+---
+
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <Container>
+    <h4 class="animate font-semibold text-black dark:text-white">
+      12 Factors of Knowledge Capitalism
+    </h4>
+    <div class="space-y-16">
+      <section>
+        <article class="space-y-4">
+          <p class="animate">
+            Inspired by the original <Link href="https://12factor.net/" aria-label="12-Factor App" external>12-Factor App</Link> and the excellent work on <Link href="https://github.com/humanlayer/12-factor-agents" aria-label="12-Factor Agents" external>12-Factor Agents</Link>.
+          </p>
+          <div class="animate my-8">
+            <img
+              src="/assets/hand-in-hand.jpeg"
+              alt="Hand in hand illustration"
+              class="w-full max-w-3xl mx-auto rounded-lg"
+            />
+          </div>
+          <p class="animate">
+            Knowledge Capitalism is a framework for understanding how knowledge creates, compounds, and captures value in networked systems. Beneath every factor lies a single objective, <strong>survival under uncertainty</strong>, the maintenance of organization against entropy. Knowledge exists in service of action, and action in service of persistence, so the ultimate aim is to maximize <strong>knowledge activation</strong>, the conversion of what is known into effective action wherever it is needed.
+          </p>
+          <p class="animate">
+            The foundational principles of that architecture span the nature of knowledge as negative entropy, the mechanisms through which it is stored and transmitted, the three interfaces through which it operates (evolution, agency, and network), the cognitive actors who wield it, and the economic system of capital, markets, and institutions through which it realizes value. Together, these factors describe the emerging architecture of an economy where knowledge itself becomes the primary form of capital, what we call <strong>cognitive capital</strong>, and point toward the <strong>coordination mechanisms</strong> through which a civilization maximizes knowledge liquidity.
+          </p>
+        </article>
+      </section>
+
+      <section class="animate space-y-8">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">
+            The 12 Factors
+          </h5>
+        </div>
+        <div class="space-y-8">
+          {sections.map(section => (
+            <div class="space-y-3">
+              <h6 class="text-lg font-semibold text-black dark:text-white">
+                {section.title}
+              </h6>
+              <ul class="flex flex-col gap-4">
+                {section.factors.map(factor => (
+                  <li>
+                    <ArrowCard entry={factor} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </Container>
+</PageLayout>

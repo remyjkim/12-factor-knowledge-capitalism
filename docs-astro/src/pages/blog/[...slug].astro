@@ -1,0 +1,87 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+import BackToPrev from "@components/BackToPrev.astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog"))
+    .filter(post => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts.map((post, index) => ({
+    params: { slug: post.slug },
+    props: {
+      post,
+      prevPost: index < posts.length - 1 ? posts[index + 1] : null,
+      nextPost: index > 0 ? posts[index - 1] : null,
+    },
+  }));
+}
+type Props = {
+  post: CollectionEntry<"blog">;
+  prevPost: CollectionEntry<"blog"> | null;
+  nextPost: CollectionEntry<"blog"> | null;
+};
+
+const { post, prevPost, nextPost } = Astro.props;
+const { Content } = await post.render();
+---
+
+<PageLayout title={post.data.title} description={post.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrev href="/">
+        Back to home
+      </BackToPrev>
+    </div>
+    <div class="space-y-1 my-10">
+      <div class="animate flex items-center gap-1.5">
+        <div class="font-base text-sm">
+          <FormattedDate date={post.data.date} />
+        </div>
+        &bull;
+        <div class="font-base text-sm">
+          {readingTime(post.body)}
+        </div>
+      </div>
+      <div class="animate text-2xl font-semibold text-black dark:text-white">
+        {post.data.title}
+      </div>
+    </div>
+    <article class="animate">
+      <Content />
+    </article>
+    <div class="animate mt-12 pt-8 border-t border-black/10 dark:border-white/10">
+      <div class="flex flex-wrap gap-4 justify-between items-center">
+        <div class="flex-1 min-w-0">
+          {prevPost && (
+            <a href={`/blog/${prevPost.slug}`} class="group flex items-center gap-2 text-sm hover:text-black dark:hover:text-white transition-colors">
+              <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              <div class="flex flex-col">
+                <span class="text-xs opacity-75">Previous</span>
+                <span class="font-medium">{prevPost.data.title}</span>
+              </div>
+            </a>
+          )}
+        </div>
+        <div class="flex-1 min-w-0 text-right">
+          {nextPost && (
+            <a href={`/blog/${nextPost.slug}`} class="group flex items-center justify-end gap-2 text-sm hover:text-black dark:hover:text-white transition-colors">
+              <div class="flex flex-col">
+                <span class="text-xs opacity-75">Next</span>
+                <span class="font-medium">{nextPost.data.title}</span>
+              </div>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </Container>
+</PageLayout>
