@@ -12,23 +12,33 @@ const allPosts = (await getCollection("blog"))
 
 const sections = [
   {
+    id: "part-1",
     title: "I. Foundations",
+    desc: "what knowledge is, and how it is carried",
     factors: allPosts.filter(p => p.slug.startsWith("01-") || p.slug.startsWith("02-"))
   },
   {
+    id: "part-2",
     title: "II. The Evolution Interface",
+    desc: "how conjecture and criticism create it",
     factors: allPosts.filter(p => p.slug.startsWith("03-") || p.slug.startsWith("04-"))
   },
   {
+    id: "part-3",
     title: "III. The Agency Interface",
+    desc: "how it converts into action",
     factors: allPosts.filter(p => p.slug.startsWith("05-") || p.slug.startsWith("06-"))
   },
   {
+    id: "part-4",
     title: "IV. The Network Interface",
+    desc: "how it moves between actors",
     factors: allPosts.filter(p => p.slug.startsWith("07-") || p.slug.startsWith("08-"))
   },
   {
+    id: "part-5",
     title: "V. Knowledge Capitalism",
+    desc: "how networks score, trade, and design for it",
     factors: allPosts.filter(p =>
       p.slug.startsWith("09-") ||
       p.slug.startsWith("10-") ||
@@ -41,54 +51,200 @@ const sections = [
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      12 Factors of Knowledge Capitalism
-    </h4>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="animate">
-            Inspired by the original <Link href="https://12factor.net/" aria-label="12-Factor App" external>12-Factor App</Link> and the excellent work on <Link href="https://github.com/humanlayer/12-factor-agents" aria-label="12-Factor Agents" external>12-Factor Agents</Link>.
-          </p>
-          <div class="animate my-8">
-            <img
-              src="/assets/hand-in-hand.jpeg"
-              alt="Hand in hand illustration"
-              class="w-full max-w-3xl mx-auto rounded-lg"
-            />
-          </div>
-          <p class="animate">
-            Knowledge Capitalism is a framework for understanding how knowledge creates, compounds, and captures value in networked systems. Beneath every factor lies a single objective, <strong>survival under uncertainty</strong>, the maintenance of organization against entropy. Knowledge exists in service of action, and action in service of persistence, so the ultimate aim is to maximize <strong>knowledge activation</strong>, the conversion of what is known into effective action wherever it is needed.
-          </p>
-          <p class="animate">
-            The foundational principles of that architecture span the nature of knowledge as negative entropy, the mechanisms through which it is stored and transmitted, the three interfaces through which it operates (evolution, agency, and network), the cognitive actors who wield it, and the economic system of capital, markets, and institutions through which it realizes value. Together, these factors describe the emerging architecture of an economy where knowledge itself becomes the primary form of capital, what we call <strong>cognitive capital</strong>, and point toward the <strong>coordination mechanisms</strong> through which a civilization maximizes knowledge liquidity.
-          </p>
-        </article>
-      </section>
+    <div class="space-y-1">
+      <h1 class="animate text-2xl font-semibold text-black dark:text-white">
+        12 Factors of Knowledge Capitalism
+      </h1>
+      <p class="animate font-serif italic font-medium text-xl leading-relaxed text-black dark:text-white !mt-3">
+        A framework for how knowledge creates, compounds, and captures value in networked systems.
+      </p>
+    </div>
 
-      <section class="animate space-y-8">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            The 12 Factors
-          </h5>
+    <figure class="animate map mt-10 mb-4">
+      <svg viewBox="0 0 640 480" role="img" aria-labelledby="map-t map-d" fill="none" stroke="currentColor">
+        <title id="map-t">The architecture of the twelve factors</title>
+        <desc id="map-d">Foundations at the top feed three parallel interfaces — evolution, agency, and network — which converge into the knowledge capitalism layer of capital, market, coordination, and mechanism design. A dashed arrow closes the loop from mechanism design back to the foundations.</desc>
+
+        <a href="#part-1"><text x="320" y="24" text-anchor="middle" class="part-label">I · Foundations</text></a>
+        <g stroke="currentColor" stroke-width="1.8">
+          <circle cx="270" cy="62" r="15"/><circle cx="370" cy="62" r="15"/>
+        </g>
+        <path d="M285 62 H355" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
+        <text x="270" y="66" text-anchor="middle" class="node-num" stroke="none">1</text>
+        <text x="370" y="66" text-anchor="middle" class="node-num" stroke="none">2</text>
+        <text x="270" y="98" text-anchor="middle" class="node-label" stroke="none">knowledge</text>
+        <text x="370" y="98" text-anchor="middle" class="node-label" stroke="none">language</text>
+
+        <path d="M320 80 V112" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
+        <path d="M120 112 H520" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
+        <g stroke="currentColor" stroke-width="1.4" opacity="0.55" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M120 112 V134"/><path d="M114 126 L120 138 L126 126"/>
+          <path d="M320 112 V134"/><path d="M314 126 L320 138 L326 126"/>
+          <path d="M520 112 V134"/><path d="M514 126 L520 138 L526 126"/>
+        </g>
+
+        <a href="#part-2"><text x="120" y="162" text-anchor="middle" class="part-label">II · Evolution</text></a>
+        <a href="#part-3"><text x="320" y="162" text-anchor="middle" class="part-label">III · Agency</text></a>
+        <a href="#part-4"><text x="520" y="162" text-anchor="middle" class="part-label">IV · Network</text></a>
+
+        <g stroke="currentColor" stroke-width="1.8">
+          <circle cx="120" cy="196" r="15"/><circle cx="120" cy="268" r="15"/>
+          <circle cx="320" cy="196" r="15"/><circle cx="320" cy="268" r="15"/>
+          <circle cx="520" cy="196" r="15"/><circle cx="520" cy="268" r="15"/>
+        </g>
+        <g stroke="currentColor" stroke-width="1.2" opacity="0.5">
+          <path d="M120 211 V253"/><path d="M320 211 V253"/><path d="M520 211 V253"/>
+        </g>
+        <g stroke="none" fill="currentColor">
+          <text x="120" y="200" text-anchor="middle" class="node-num">3</text>
+          <text x="120" y="272" text-anchor="middle" class="node-num">4</text>
+          <text x="320" y="200" text-anchor="middle" class="node-num">5</text>
+          <text x="320" y="272" text-anchor="middle" class="node-num">6</text>
+          <text x="520" y="200" text-anchor="middle" class="node-num">7</text>
+          <text x="520" y="272" text-anchor="middle" class="node-num">8</text>
+        </g>
+        <g stroke="none" fill="currentColor">
+          <text x="152" y="200" text-anchor="start" class="node-label">explore</text>
+          <text x="152" y="272" text-anchor="start" class="node-label">criticize</text>
+          <text x="352" y="200" text-anchor="start" class="node-label">act</text>
+          <text x="352" y="272" text-anchor="start" class="node-label">embody</text>
+          <text x="488" y="200" text-anchor="end" class="node-label">transmit</text>
+          <text x="488" y="272" text-anchor="end" class="node-label">align</text>
+        </g>
+
+        <g stroke="currentColor" stroke-width="1.4" opacity="0.55" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M120 283 V310 H320 M520 283 V310 H320"/>
+          <path d="M320 310 V330"/><path d="M314 322 L320 334 L326 322"/>
+        </g>
+
+        <a href="#part-5"><text x="320" y="360" text-anchor="middle" class="part-label">V · Knowledge Capitalism</text></a>
+        <g stroke="currentColor" stroke-width="1.8">
+          <circle cx="110" cy="398" r="15"/><circle cx="250" cy="398" r="15"/><circle cx="390" cy="398" r="15"/><circle cx="530" cy="398" r="15"/>
+        </g>
+        <g stroke="currentColor" stroke-width="1.2" opacity="0.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M125 398 H235"/><path d="M229 392 L237 398 L229 404"/>
+          <path d="M265 398 H375"/><path d="M369 392 L377 398 L369 404"/>
+          <path d="M405 398 H515"/><path d="M509 392 L517 398 L509 404"/>
+        </g>
+        <g stroke="none" fill="currentColor">
+          <text x="110" y="402" text-anchor="middle" class="node-num">9</text>
+          <text x="250" y="402" text-anchor="middle" class="node-num">10</text>
+          <text x="390" y="402" text-anchor="middle" class="node-num">11</text>
+          <text x="530" y="402" text-anchor="middle" class="node-num">12</text>
+          <text x="110" y="434" text-anchor="middle" class="node-label">capital</text>
+          <text x="250" y="434" text-anchor="middle" class="node-label">market</text>
+          <text x="390" y="434" text-anchor="middle" class="node-label">coordination</text>
+          <text x="530" y="434" text-anchor="middle" class="node-label">design</text>
+        </g>
+
+        <path d="M545 386 C620 300 620 130 393 58" stroke="currentColor" stroke-width="1.1" stroke-dasharray="4 6" opacity="0.45" fill="none"/>
+        <g stroke="currentColor" stroke-width="1.1" opacity="0.45" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M408 52 L389 57 L400 70"/>
+        </g>
+        <text x="628" y="230" text-anchor="middle" class="node-label" stroke="none" font-style="italic" opacity="0.55" transform="rotate(90 628 230)">the loop closes</text>
+      </svg>
+      <figcaption class="mt-3 font-sans text-[0.8rem] leading-relaxed text-black/50 dark:text-white/50">
+        <span class="font-semibold text-black/80 dark:text-white/85">The architecture.</span>
+        Foundations feed three interfaces — how knowledge evolves, acts, and moves — and everything converges into the economic layer, whose mechanisms feed discovery again.
+      </figcaption>
+    </figure>
+
+    <div class="animate flex flex-wrap items-baseline justify-between gap-4 mb-14">
+      <a href="/blog/01-knowledge-negative-entropy" class="group inline-flex items-center gap-2 text-[0.92rem] font-medium text-black dark:text-white border-b border-black/15 dark:border-white/25 pb-0.5 hover:border-black dark:hover:border-white transition-colors">
+        Begin with Factor 1
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-hover:translate-x-1 transition-transform"><path d="M9 5l7 7-7 7"/></svg>
+      </a>
+      <span class="text-[0.78rem] text-black/35 dark:text-white/35">twelve factors · read in sequence · ~60 minutes</span>
+    </div>
+
+    <article class="space-y-4">
+      <p class="animate">
+        Beneath every factor lies a single objective: <strong>survival under uncertainty</strong> — the maintenance of organization against entropy. Knowledge exists in service of action, and action in service of persistence.
+      </p>
+      <div class="animate inbrief">
+        <span class="label">In brief</span>
+        <ul>
+          <li>The <strong>objective</strong> is survival under uncertainty: systems persist by converting what they know into better decisions. <a href="/blog/01-knowledge-negative-entropy">Factor 1</a> sets this standard.</li>
+          <li>The <strong>method</strong> is <strong>knowledge activation</strong> — the conversion of what is known into effective action wherever it is needed, through the interfaces of evolution, agency, and network.</li>
+          <li>The <strong>claim</strong> is that knowledge itself becomes the primary form of capital — <strong>cognitive capital</strong> (<a href="/blog/09-capital-scoring-system">Factor 9</a>) — and civilization's task is designing the mechanisms that maximize its liquidity (<a href="/blog/12-mechanism-design-welfare">Factor 12</a>).</li>
+        </ul>
+      </div>
+      <p class="animate text-sm !text-black/40 dark:!text-white/40">
+        Inspired by the original <Link href="https://12factor.net/" aria-label="12-Factor App" external>12-Factor App</Link> and <Link href="https://github.com/humanlayer/12-factor-agents" aria-label="12-Factor Agents" external>12-Factor Agents</Link>.
+      </p>
+    </article>
+
+    <section class="animate mt-14 space-y-10">
+      <h5 class="font-semibold text-black dark:text-white">
+        The 12 Factors
+      </h5>
+      {sections.map(section => (
+        <div id={section.id} class="space-y-3 scroll-mt-24">
+          <div>
+            <h6 class="text-lg font-semibold text-black dark:text-white">
+              {section.title}
+            </h6>
+            <p class="font-serif italic text-[0.88rem] text-black/50 dark:text-white/50 mt-0.5">
+              {section.desc}
+            </p>
+          </div>
+          <ul class="flex flex-col gap-4">
+            {section.factors.map(factor => (
+              <li>
+                <ArrowCard entry={factor} />
+              </li>
+            ))}
+          </ul>
         </div>
-        <div class="space-y-8">
-          {sections.map(section => (
-            <div class="space-y-3">
-              <h6 class="text-lg font-semibold text-black dark:text-white">
-                {section.title}
-              </h6>
-              <ul class="flex flex-col gap-4">
-                {section.factors.map(factor => (
-                  <li>
-                    <ArrowCard entry={factor} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
+      ))}
+      <p class="font-serif italic text-[0.8rem] text-black/40 dark:text-white/40">
+        Read sequentially — each factor builds on the last, and the twelfth closes the loop.
+      </p>
+    </section>
+
+    <div class="animate mt-14 px-7 py-6 rounded-r-xl border-l-2 border-black/15 dark:border-white/15 bg-black/[0.033] dark:bg-white/[0.045]">
+      <span class="block font-sans text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-black/35 dark:text-white/35 mb-3">Cite this manifesto</span>
+      <p class="text-[0.85rem] leading-relaxed mb-4">
+        Kim, R. (2026). <em>The 12 Factors of Knowledge Capitalism.</em> https://knowledgecapitalism.com
+      </p>
+      <pre class="font-mono text-[0.74rem] leading-relaxed text-black/55 dark:text-white/55 bg-stone-50 dark:bg-stone-800 border border-black/10 dark:border-white/10 rounded-md px-4 py-3 overflow-x-auto">{`@misc{kim2026knowledgecapitalism,
+  author       = {Kim, Remy},
+  title        = {The 12 Factors of Knowledge Capitalism},
+  year         = {2026},
+  howpublished = {\\url{https://knowledgecapitalism.com}}
+}`}</pre>
     </div>
   </Container>
 </PageLayout>
+
+<style>
+  .map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .map .part-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    fill: currentColor;
+    opacity: 0.55;
+    stroke: none;
+  }
+  .map a:hover .part-label {
+    opacity: 1;
+  }
+  .map .node-num {
+    font-size: 12px;
+    font-weight: 600;
+    fill: currentColor;
+    stroke: none;
+  }
+  .map .node-label {
+    font-size: 11.5px;
+    fill: currentColor;
+    opacity: 0.75;
+    stroke: none;
+  }
+</style>
