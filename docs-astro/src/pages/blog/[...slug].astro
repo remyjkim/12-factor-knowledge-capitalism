@@ -37,6 +37,17 @@ const { Content } = await post.render();
       </BackToPrev>
     </div>
     <div class="space-y-1 my-10">
+      {post.data.part && (
+        <div class="animate flex items-baseline justify-between gap-4 text-[0.7rem] font-medium uppercase tracking-[0.14em] text-black/50 dark:text-white/50 mb-2">
+          <span>{post.data.part}</span>
+          {post.data.factor && (
+            <span class="tracking-[0.08em] text-black/35 dark:text-white/35">Factor {post.data.factor} of 12</span>
+          )}
+        </div>
+      )}
+      <div class="animate text-2xl font-semibold text-black dark:text-white">
+        {post.data.title}
+      </div>
       <div class="animate flex items-center gap-1.5">
         <div class="font-base text-sm">
           <FormattedDate date={post.data.date} />
@@ -46,9 +57,14 @@ const { Content } = await post.render();
           {readingTime(post.body)}
         </div>
       </div>
-      <div class="animate text-2xl font-semibold text-black dark:text-white">
-        {post.data.title}
-      </div>
+      {post.data.principle && (
+        <div class="animate pt-8">
+          <span class="block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-black/35 dark:text-white/35 mb-2.5">Principle</span>
+          <p class="font-serif italic font-medium text-xl leading-relaxed text-black dark:text-white m-0">
+            {post.data.principle}
+          </p>
+        </div>
+      )}
     </div>
     <article class="animate">
       <Content />

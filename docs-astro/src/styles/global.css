@@ -71,3 +71,226 @@ html #back-to-top {
 html.scrolled #back-to-top {
   @apply opacity-100 pointer-events-auto;
 }
+
+@view-transition {
+  navigation: auto;
+}
+
+article h2 {
+  @apply relative scroll-mt-24;
+}
+
+article h2 .anchor {
+  @apply absolute -left-6 top-0 font-normal no-underline opacity-0 transition-opacity;
+  @apply text-black/30 dark:text-white/30;
+}
+
+article h2:hover .anchor {
+  @apply opacity-100;
+}
+
+article .label {
+  @apply block font-sans text-[0.66rem] font-semibold uppercase tracking-[0.16em];
+  @apply text-black/35 dark:text-white/35;
+  @apply mb-3;
+}
+
+article .inbrief {
+  @apply my-10 rounded-lg border border-black/15 dark:border-white/15;
+  @apply bg-black/[0.033] dark:bg-white/[0.045];
+  @apply px-6 py-5;
+}
+
+article .inbrief ul {
+  @apply my-0;
+}
+
+article .inbrief li {
+  @apply font-sans text-[0.92rem] leading-relaxed my-2;
+}
+
+.sn-num {
+  @apply font-sans text-[0.68rem] font-semibold align-super leading-none px-0.5;
+  @apply text-black/50 dark:text-white/50 cursor-pointer;
+}
+
+.sn-num:hover {
+  @apply text-black dark:text-white;
+}
+
+.sn-toggle {
+  @apply hidden;
+}
+
+.sidenote {
+  @apply font-sans text-[0.78rem] leading-relaxed text-black/55 dark:text-white/55;
+}
+
+.sidenote strong {
+  @apply text-black/80 dark:text-white/85 font-medium;
+}
+
+@media (min-width: 1280px) {
+  .sidenote {
+    float: right;
+    clear: right;
+    width: 15rem;
+    margin-right: -19rem;
+    margin-top: 0.15rem;
+    margin-bottom: 0.9rem;
+  }
+  .sn-num {
+    @apply cursor-default;
+  }
+}
+
+@media (max-width: 1279.9px) {
+  .sidenote {
+    @apply hidden;
+  }
+  .sn-toggle:checked ~ .sidenote {
+    @apply block my-3 px-4 py-3 rounded-r-md;
+    @apply border-l-2 border-black/15 dark:border-white/15;
+    @apply bg-black/[0.033] dark:bg-white/[0.045];
+  }
+}
+
+article figure.fig {
+  @apply my-10;
+}
+
+article figure.fig svg {
+  @apply w-full h-auto block;
+}
+
+article figure.fig figcaption {
+  @apply mt-3 font-sans text-[0.8rem] leading-relaxed text-black/50 dark:text-white/50;
+}
+
+article figure.fig figcaption strong {
+  @apply text-black/80 dark:text-white/85;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    article figure.fig {
+      animation: fig-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 38%;
+    }
+  }
+}
+
+@keyframes fig-reveal {
+  from {
+    opacity: 0.1;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+article .related {
+  @apply mt-12;
+}
+
+article .related h2.label {
+  @apply text-[0.66rem] font-semibold uppercase tracking-[0.16em] mt-0 mb-3;
+  @apply text-black/35 dark:text-white/35;
+}
+
+article .related a {
+  @apply flex items-center justify-between gap-4 no-underline;
+  @apply rounded-lg border border-black/15 dark:border-white/15;
+  @apply px-4 py-3 my-2;
+  @apply transition-colors duration-300 ease-in-out;
+}
+
+article .related a:hover {
+  @apply border-black/40 dark:border-white/40 bg-black/[0.033] dark:bg-white/[0.045];
+}
+
+article .related .r-title {
+  @apply font-sans text-sm font-medium text-black dark:text-white;
+}
+
+article .related .r-why {
+  @apply font-sans text-xs text-black/50 dark:text-white/50;
+}
+
+article .related .r-arrow {
+  @apply flex-none text-black/35 dark:text-white/35 transition-transform duration-300;
+}
+
+article .related a:hover .r-arrow {
+  @apply translate-x-0.5 text-black dark:text-white;
+}
+
+article .canonical {
+  @apply mt-12 rounded-r-xl border-l-2 border-black/15 dark:border-white/15;
+  @apply bg-black/[0.033] dark:bg-white/[0.045];
+  @apply px-7 py-6;
+}
+
+article .canonical p {
+  @apply text-[0.94rem] leading-loose my-0;
+}
+
+article .canonical sup {
+  @apply font-sans text-[0.62rem] text-black/50 dark:text-white/50;
+}
+
+article .refs {
+  @apply mt-12;
+}
+
+article .refs h2 {
+  @apply text-lg;
+}
+
+article .refs ol {
+  @apply list-none p-0 my-0;
+}
+
+article .refs li {
+  @apply font-sans text-[0.83rem] leading-relaxed text-black/55 dark:text-white/55;
+  @apply my-2.5 pl-7 -indent-7;
+}
+
+.term {
+  @apply font-serif italic cursor-pointer bg-transparent border-0 p-0 text-[1em] text-current;
+  @apply underline decoration-dotted underline-offset-4 decoration-black/40 dark:decoration-white/40;
+}
+
+.term:hover {
+  @apply text-black dark:text-white;
+}
+
+[popover] {
+  @apply m-auto w-[min(90vw,26rem)] rounded-xl border border-black/15 dark:border-white/15;
+  @apply bg-stone-50 dark:bg-stone-800 text-black/70 dark:text-white/75;
+  @apply px-6 py-5 shadow-2xl;
+}
+
+[popover]::backdrop {
+  background: rgba(15, 12, 10, 0.28);
+  backdrop-filter: blur(2px);
+}
+
+[popover] .def-term {
+  @apply font-serif italic text-lg text-black dark:text-white mb-2;
+}
+
+[popover] p {
+  @apply font-sans text-sm leading-relaxed mb-3 mt-0;
+}
+
+[popover] a {
+  @apply font-sans text-xs text-black/50 dark:text-white/60 underline underline-offset-2;
+}
+
+[popover] a:hover {
+  @apply text-black dark:text-white;
+}
