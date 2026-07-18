@@ -1,0 +1,540 @@
+<!-- ABOUTME: Self-contained visual mockup of the target factor-page design for knowledgecapitalism.com. -->
+<!-- ABOUTME: Shows the Option B template on Factor 1 with sidenotes, figures, glossary, dark mode, and an annotation toggle for review. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Factor 1: Knowledge is Negative Entropy — target design mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f5f5f4;
+    --bg-elev: #fafaf9;
+    --ink: #1c1917;
+    --body: #3f3a36;
+    --muted: #78716c;
+    --faint: #a8a29e;
+    --hairline: rgba(28, 25, 23, 0.14);
+    --hairline-soft: rgba(28, 25, 23, 0.08);
+    --tint: rgba(28, 25, 23, 0.033);
+    --review: #b45309;
+  }
+  html.dark {
+    --bg: #1c1917;
+    --bg-elev: #232019;
+    --bg-elev: #24211e;
+    --ink: #fafaf9;
+    --body: #d6d3d1;
+    --muted: #a8a29e;
+    --faint: #78716c;
+    --hairline: rgba(250, 250, 249, 0.16);
+    --hairline-soft: rgba(250, 250, 249, 0.09);
+    --tint: rgba(250, 250, 249, 0.045);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--body);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  /* ---- reading progress (pure CSS scroll timeline) ---- */
+  #progress {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--ink); opacity: 0.35; transform-origin: 0 50%;
+    transform: scaleX(0); z-index: 60; pointer-events: none;
+  }
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      #progress {
+        animation: grow linear both;
+        animation-timeline: scroll(root);
+      }
+      @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    }
+  }
+
+  /* ---- header (matches current site chrome) ---- */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 1.1rem 1.25rem;
+    background: color-mix(in srgb, var(--bg) 75%, transparent);
+    backdrop-filter: blur(8px) saturate(2);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .site-name { font-size: 0.875rem; font-weight: 600; color: var(--ink); text-decoration: none; letter-spacing: 0.01em; }
+  .header-tools { display: flex; gap: 0.4rem; align-items: center; }
+  .tool-btn {
+    font: 500 0.7rem/1 "Inter", sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); background: none; border: 1px solid var(--hairline);
+    border-radius: 999px; padding: 0.42rem 0.8rem; cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tool-btn:hover { color: var(--ink); border-color: var(--muted); }
+  .tool-btn[aria-pressed="true"] { color: var(--review); border-color: var(--review); }
+
+  main { padding: 7.5rem 1.25rem 4rem; }
+  .col { max-width: 40rem; margin: 0 auto; position: relative; }
+
+  /* ---- wayfinding ---- */
+  .backlink {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.8rem; color: var(--muted); text-decoration: none;
+  }
+  .backlink:hover { color: var(--ink); }
+  .breadcrumb {
+    margin-top: 2.6rem;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  }
+  .breadcrumb .n { color: var(--faint); letter-spacing: 0.08em; }
+  h1 {
+    font-family: "Inter", sans-serif; font-weight: 600; color: var(--ink);
+    font-size: 1.9rem; line-height: 1.22; letter-spacing: -0.015em;
+    margin: 0.5rem 0 0.6rem;
+  }
+  .meta { font-size: 0.8rem; color: var(--muted); }
+  .meta span + span::before { content: "·"; margin: 0 0.5em; color: var(--faint); }
+
+  /* ---- principle epigraph ---- */
+  .principle { margin: 2.75rem 0 0; }
+  .principle .label, .inbrief .label, .canonical .label {
+    display: block; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--faint); margin-bottom: 0.7rem;
+  }
+  .principle p {
+    font-family: "Lora", Georgia, serif; font-style: italic; font-weight: 500;
+    font-size: 1.28rem; line-height: 1.6; color: var(--ink); margin: 0;
+  }
+
+  /* ---- in brief ---- */
+  .inbrief {
+    margin: 2.5rem 0 0; padding: 1.35rem 1.5rem 1.45rem;
+    border: 1px solid var(--hairline); border-radius: 8px; background: var(--tint);
+  }
+  .inbrief ul { margin: 0; padding: 0 0 0 1.1rem; }
+  .inbrief li {
+    font-size: 0.92rem; line-height: 1.65; margin: 0.55rem 0; color: var(--body);
+  }
+  .inbrief li::marker { color: var(--faint); }
+
+  /* ---- prose ---- */
+  article { margin-top: 1rem; }
+  article h2 {
+    font-family: "Inter", sans-serif; font-weight: 600; color: var(--ink);
+    font-size: 1.22rem; letter-spacing: -0.01em; margin: 3rem 0 1rem;
+    scroll-margin-top: 6rem; position: relative;
+  }
+  article h2 .anchor {
+    position: absolute; left: -1.4rem; top: 0; opacity: 0; text-decoration: none;
+    color: var(--faint); font-weight: 400; transition: opacity 0.15s;
+  }
+  article h2:hover .anchor { opacity: 1; }
+  article p {
+    font-family: "Lora", Georgia, serif; font-size: 1.04rem; line-height: 1.8;
+    margin: 1.15rem 0; color: var(--body);
+  }
+  article em { font-style: italic; }
+  article strong { color: var(--ink); font-weight: 600; }
+  a.textlink { color: currentColor; text-decoration: underline; text-underline-offset: 2.5px; text-decoration-color: var(--hairline); font-family: "Inter", sans-serif; font-size: 0.95em; transition: color 0.2s, text-decoration-color 0.2s; }
+  a.textlink:hover { color: var(--ink); text-decoration-color: var(--muted); }
+
+  /* ---- sidenotes (Tufte pattern) ---- */
+  .sn-num {
+    counter-increment: none; font-family: "Inter", sans-serif; font-size: 0.68rem;
+    font-weight: 600; color: var(--muted); vertical-align: super; line-height: 0;
+    padding: 0 0.1em; cursor: pointer;
+  }
+  .sn-num:hover { color: var(--ink); }
+  .sn-toggle { display: none; }
+  .sidenote {
+    font-family: "Inter", sans-serif; font-size: 0.78rem; line-height: 1.55;
+    color: var(--muted);
+  }
+  .sidenote .who { color: var(--ink); font-weight: 500; }
+  @media (min-width: 1280px) {
+    .sidenote {
+      float: right; clear: right; width: 16.5rem; margin-right: -20.5rem;
+      margin-top: 0.15rem; margin-bottom: 0.9rem; text-align: left;
+    }
+    .sn-num { cursor: default; }
+  }
+  @media (max-width: 1279.9px) {
+    .sidenote { display: none; }
+    .sn-toggle:checked ~ .sidenote {
+      display: block; margin: 0.8rem 0 1rem; padding: 0.8rem 1rem;
+      border-left: 2px solid var(--hairline); background: var(--tint); border-radius: 0 6px 6px 0;
+    }
+  }
+
+  /* ---- glossary term + popover ---- */
+  .term {
+    font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer;
+    text-decoration: underline; text-decoration-style: dotted; text-decoration-color: var(--muted);
+    text-underline-offset: 3px;
+  }
+  .term:hover { color: var(--ink); }
+  [popover] {
+    margin: auto; width: min(90vw, 26rem); border: 1px solid var(--hairline);
+    border-radius: 10px; background: var(--bg-elev); color: var(--body);
+    padding: 1.4rem 1.6rem 1.5rem; box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+  }
+  [popover]::backdrop { background: rgba(15, 12, 10, 0.28); backdrop-filter: blur(2px); }
+  [popover] .def-term { font-family: "Lora", serif; font-style: italic; font-size: 1.05rem; color: var(--ink); margin: 0 0 0.5rem; }
+  [popover] p { font-size: 0.88rem; line-height: 1.65; margin: 0 0 0.9rem; }
+  [popover] a { font-family: "Inter", sans-serif; font-size: 0.78rem; color: var(--muted); }
+  [popover] a:hover { color: var(--ink); }
+
+  /* ---- figures ---- */
+  figure.fig { margin: 2.4rem 0; }
+  figure.fig svg { width: 100%; height: auto; display: block; color: var(--body); }
+  figure.fig figcaption {
+    margin-top: 0.8rem; font-family: "Inter", sans-serif; font-size: 0.8rem;
+    line-height: 1.55; color: var(--muted);
+  }
+  figure.fig figcaption .fignum { font-weight: 600; color: var(--ink); }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      figure.fig {
+        animation: figin linear both;
+        animation-timeline: view();
+        animation-range: entry 5% entry 38%;
+      }
+      @keyframes figin {
+        from { opacity: 0.1; transform: translateY(14px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+  }
+
+  /* ---- related factors ---- */
+  .related { margin: 3.2rem 0 0; }
+  .related h2 { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin: 0 0 0.9rem; }
+  .related a {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border: 1px solid var(--hairline); border-radius: 8px; padding: 0.85rem 1.1rem;
+    margin: 0.55rem 0; text-decoration: none; transition: border-color 0.2s, background 0.2s;
+  }
+  .related a:hover { border-color: var(--muted); background: var(--tint); }
+  .related .r-title { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+  .related .r-why { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+  .related .r-arrow { color: var(--faint); flex: none; transition: transform 0.2s; }
+  .related a:hover .r-arrow { transform: translateX(3px); color: var(--ink); }
+
+  /* ---- canonical manifesto paragraph ---- */
+  .canonical {
+    margin: 3.2rem 0 0; padding: 1.6rem 1.7rem 1.7rem;
+    border-left: 2px solid var(--hairline); background: var(--tint); border-radius: 0 10px 10px 0;
+  }
+  .canonical p {
+    font-family: "Lora", Georgia, serif; font-size: 0.94rem; line-height: 1.85;
+    color: var(--body); margin: 0;
+  }
+  .canonical sup { font-family: "Inter", sans-serif; font-size: 0.62rem; color: var(--muted); }
+
+  /* ---- references ---- */
+  .refs { margin: 3.2rem 0 0; }
+  .refs h2 { font-family: "Inter", sans-serif; font-weight: 600; color: var(--ink); font-size: 1.05rem; margin: 0 0 1rem; }
+  .refs ol { margin: 0; padding: 0; list-style: none; counter-reset: ref; }
+  .refs li {
+    font-family: "Inter", sans-serif; font-size: 0.83rem; line-height: 1.6; color: var(--muted);
+    padding-left: 1.7rem; text-indent: -1.7rem; margin: 0.6rem 0; counter-increment: ref;
+  }
+  .refs li::before { content: counter(ref) "."; display: inline-block; width: 1.7rem; text-indent: 0; color: var(--faint); }
+  .refs li a { color: inherit; }
+  .refs li a:hover { color: var(--ink); }
+  .refs .r-title-i { font-style: italic; }
+
+  /* ---- prev / next ---- */
+  .pager {
+    margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--hairline-soft);
+    display: flex; justify-content: space-between; gap: 1rem;
+  }
+  .pager a { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--muted); font-size: 0.85rem; transition: color 0.2s; }
+  .pager a:hover { color: var(--ink); }
+  .pager .dir { display: block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+  .pager .p-title { font-weight: 500; color: var(--ink); }
+  .pager svg { flex: none; transition: transform 0.2s; }
+  .pager a:hover svg.next { transform: translateX(3px); }
+
+  footer { padding: 2rem 1.25rem 2.5rem; text-align: center; font-size: 0.75rem; color: var(--faint); }
+
+  /* ---- review annotations (mockup chrome, not part of the design) ---- */
+  [data-note] { position: relative; }
+  body.annotate [data-note] { outline: 1px dashed var(--review); outline-offset: 5px; }
+  body.annotate [data-note]::after {
+    content: attr(data-note);
+    position: absolute; top: -1.15rem; right: 0;
+    font: 500 0.62rem/1 "Inter", sans-serif; letter-spacing: 0.04em;
+    color: var(--review); background: var(--bg); border: 1px dashed var(--review);
+    border-radius: 3px; padding: 2px 6px; z-index: 40; white-space: nowrap;
+  }
+
+  .impl-map { margin: 4rem auto 0; max-width: 40rem; font-size: 0.8rem; color: var(--muted); }
+  .impl-map summary { cursor: pointer; font-weight: 500; color: var(--faint); }
+  .impl-map table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; }
+  .impl-map td { border-top: 1px solid var(--hairline-soft); padding: 0.45rem 0.6rem 0.45rem 0; vertical-align: top; }
+  .impl-map td:first-child { color: var(--ink); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div id="progress" data-note="reading progress — CSS scroll timeline, zero JS"></div>
+
+<header>
+  <a class="site-name" href="#">12 Factors of Knowledge Capitalism</a>
+  <div class="header-tools">
+    <button class="tool-btn" id="annotate-btn" aria-pressed="false" title="Toggle review annotations (mockup chrome only)">Annotations</button>
+    <button class="tool-btn" id="theme-btn" title="Toggle light / dark">Theme</button>
+  </div>
+</header>
+
+<main>
+  <div class="col">
+
+    <a class="backlink" href="#">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
+      Back to the 12 Factors
+    </a>
+
+    <div class="breadcrumb" data-note="part breadcrumb — frontmatter part/factor fields">
+      <span>Part I &nbsp;·&nbsp; Foundations</span>
+      <span class="n">Factor 1 of 12</span>
+    </div>
+
+    <h1>Knowledge is Negative Entropy</h1>
+    <div class="meta"><span>January 2026</span><span>6 min read</span></div>
+
+    <div class="principle" data-note="principle epigraph — frontmatter `principle`">
+      <span class="label">Principle</span>
+      <p>Knowledge is information that enables effective action — the ordered exception a system carves out of a universe that trends toward disorder.</p>
+    </div>
+
+    <div class="inbrief" data-note="in-brief box — :::brief directive">
+      <span class="label">In brief</span>
+      <ul>
+        <li>All knowledge is information, but almost no information is knowledge. A signal counts as knowledge only when it improves your capacity to act.</li>
+        <li>Living systems — organisms, firms, civilizations — persist by converting signals into better decisions, maintaining order against entropy.</li>
+        <li>It follows that knowledge is measured by consequence, not content: its value is exactly the improvement in action it makes possible.</li>
+      </ul>
+    </div>
+
+    <article>
+      <h2 id="the-claim"><a class="anchor" href="#the-claim">#</a>The claim</h2>
+
+      <p>Shannon's information theory gave us the mathematics of surprise: information is the reduction of
+      uncertainty, measured in bits.<label class="sn-num" for="sn1">1</label><input type="checkbox" id="sn1" class="sn-toggle" /><span
+      class="sidenote" data-note="citation sidenote — rehype-citation + Tufte rehype transform"><span class="who">Shannon (1948)</span>, "A Mathematical Theory of
+      Communication." Deliberately scoped: "semantic aspects of communication are irrelevant to the engineering
+      problem."</span> But Shannon was explicit about what his theory left out — the question of what a message
+      <em>means</em>, and whether it matters to anyone. A random bitstream is maximally informative in the Shannon
+      sense and teaches you nothing. It cannot change what you do.</p>
+
+      <p>This is the distinction the whole framework rests on: <strong>information</strong> is any reduction in
+      uncertainty; <strong>knowledge</strong> is the subset of information that improves action. Wiener, working
+      the same postwar seam, saw the deeper implication — that organized systems maintain themselves by importing
+      order, a local reversal of the entropy that claims everything
+      else.<label class="sn-num" for="sn2">2</label><input type="checkbox" id="sn2" class="sn-toggle" /><span class="sidenote"><span
+      class="who">Wiener (1948)</span>, <em>Cybernetics</em>. Living systems as islands of locally decreasing
+      entropy, sustained by feedback.</span> Knowledge is that imported order. It is what a system knows that
+      lets it stay a system.</p>
+
+      <figure class="fig" data-note="figure — Figure.astro component, currentColor SVG, scroll reveal">
+        <svg viewBox="0 0 640 240" role="img" aria-labelledby="f1a-t f1a-d" fill="none" stroke="currentColor">
+          <title id="f1a-t">Knowledge as negative entropy</title>
+          <desc id="f1a-d">A disordered scatter of points resolves, along an arrow labelled knowledge, into an ordered lattice. Entropy points the other way.</desc>
+          <g fill="currentColor" stroke="none" opacity="0.8">
+            <circle cx="55" cy="60" r="4.5"/><circle cx="96" cy="142" r="4.5"/><circle cx="48" cy="184" r="4.5"/>
+            <circle cx="132" cy="78" r="4.5"/><circle cx="172" cy="150" r="4.5"/><circle cx="108" cy="198" r="4.5"/>
+            <circle cx="150" cy="44" r="4.5"/><circle cx="80" cy="104" r="4.5"/><circle cx="190" cy="112" r="4.5"/>
+            <circle cx="42" cy="120" r="4.5"/><circle cx="120" cy="132" r="4.5"/><circle cx="160" cy="92" r="4.5"/>
+          </g>
+          <g stroke="currentColor" stroke-width="1.25" opacity="0.55">
+            <path d="M450 56 H570 M450 96 H570 M450 136 H570 M450 176 H570"/>
+            <path d="M450 56 V176 M490 56 V176 M530 56 V176 M570 56 V176"/>
+          </g>
+          <g fill="currentColor" stroke="none">
+            <circle cx="450" cy="56" r="4.5"/><circle cx="490" cy="56" r="4.5"/><circle cx="530" cy="56" r="4.5"/><circle cx="570" cy="56" r="4.5"/>
+            <circle cx="450" cy="96" r="4.5"/><circle cx="490" cy="96" r="4.5"/><circle cx="530" cy="96" r="4.5"/><circle cx="570" cy="96" r="4.5"/>
+            <circle cx="450" cy="136" r="4.5"/><circle cx="490" cy="136" r="4.5"/><circle cx="530" cy="136" r="4.5"/><circle cx="570" cy="136" r="4.5"/>
+            <circle cx="450" cy="176" r="4.5"/><circle cx="490" cy="176" r="4.5"/><circle cx="530" cy="176" r="4.5"/><circle cx="570" cy="176" r="4.5"/>
+          </g>
+          <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M250 108 H394"/><path d="M380 96 L398 108 L380 120"/>
+          </g>
+          <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" stroke-dasharray="3 5">
+            <path d="M394 148 H250"/><path d="M264 136 L246 148 L264 160"/>
+          </g>
+          <text x="322" y="94" text-anchor="middle" font-size="14" font-style="italic" fill="currentColor" stroke="none">knowledge</text>
+          <text x="322" y="174" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.55">entropy</text>
+          <g fill="currentColor" stroke="none" opacity="0.8" font-size="13">
+            <text x="116" y="230" text-anchor="middle">high entropy</text>
+            <text x="510" y="230" text-anchor="middle">low entropy</text>
+          </g>
+        </svg>
+        <figcaption><span class="fignum">Figure 1.</span> Knowledge is the ordering principle: the same elements,
+        arranged by what a system has learned, become structure. Entropy runs the film backward.</figcaption>
+      </figure>
+
+      <h2 id="the-mechanism"><a class="anchor" href="#the-mechanism">#</a>The mechanism</h2>
+
+      <p>How does information become knowledge? Through a decision. An agent — a cell, a person, a firm — acts
+      under uncertainty: it cannot observe the full state of the world, so it carries a model, a working belief
+      about how things stand.<label class="sn-num" for="sn3">3</label><input type="checkbox" id="sn3" class="sn-toggle" /><span
+      class="sidenote"><span class="who">Åström (1965)</span>. Optimal control with incomplete state information:
+      the belief state as a sufficient statistic for acting.</span> Observations arrive; the belief updates; the
+      next action is a little less blind. The loop has a standard formalism<label class="sn-num" for="sn4">4</label><input
+      type="checkbox" id="sn4" class="sn-toggle" /><span class="sidenote"><span class="who">Kaelbling, Littman &amp;
+      Cassandra (1998)</span>. Partially observable Markov decision processes — planning when the world is only
+      partly visible.</span> but the machinery matters less than its consequence: the worth of any signal is
+      precisely how much it improves the decisions downstream of it. Howard's value-of-information theory makes
+      the point with uncomfortable rigor — information that cannot change your decision is worth exactly
+      nothing.<label class="sn-num" for="sn5">5</label><input type="checkbox" id="sn5" class="sn-toggle" /><span class="sidenote"><span
+      class="who">Howard (1966)</span>, "Information Value Theory." The value of information is the value of the
+      decision change it enables.</span></p>
+
+      <p>This is the standard the rest of the framework inherits, and it has a name here:
+      <button class="term" popovertarget="def-ka" data-note="glossary term — native Popover API, zero JS">knowledge
+      activation</button>. Knowledge realizes value only when it converts into effective action — somewhere, by
+      someone. A library that no decision ever touches is, economically, indistinguishable from noise.</p>
+
+      <figure class="fig">
+        <svg viewBox="0 0 640 260" role="img" aria-labelledby="f1b-t f1b-d" fill="none" stroke="currentColor">
+          <title id="f1b-t">The activation filter</title>
+          <desc id="f1b-d">Many incoming signals reach a model, which updates and drives an action; a dashed consequence loop feeds back from the action to the model.</desc>
+          <g fill="currentColor" stroke="none" opacity="0.75">
+            <circle cx="52" cy="66" r="3.5"/><circle cx="84" cy="98" r="3.5"/><circle cx="48" cy="128" r="3.5"/>
+            <circle cx="90" cy="152" r="3.5"/><circle cx="60" cy="182" r="3.5"/><circle cx="112" cy="70" r="3.5"/>
+            <circle cx="120" cy="122" r="3.5"/><circle cx="104" cy="190" r="3.5"/>
+          </g>
+          <g stroke="currentColor" stroke-width="1.3" opacity="0.6" stroke-linecap="round">
+            <path d="M96 100 H180 M100 128 H180 M108 156 H180"/>
+          </g>
+          <rect x="200" y="84" width="150" height="90" rx="10" stroke="currentColor" stroke-width="1.6"/>
+          <g stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M224 110 H298"/><path d="M224 128 H326" opacity="0.75"/><path d="M224 146 H272" opacity="0.5"/>
+          </g>
+          <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M350 128 H470"/><path d="M456 116 L474 128 L456 140"/>
+          </g>
+          <circle cx="516" cy="128" r="26" stroke="currentColor" stroke-width="1.8"/>
+          <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M506 128 H524"/><path d="M519 121 L527 128 L519 135"/>
+          </g>
+          <path d="M516 158 C516 216 300 224 275 182" stroke="currentColor" stroke-width="1.3" stroke-dasharray="4 5" opacity="0.55" fill="none"/>
+          <g stroke="currentColor" stroke-width="1.3" opacity="0.55" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M284 194 L272 178 L292 176"/>
+          </g>
+          <g fill="currentColor" stroke="none" font-size="13" opacity="0.8">
+            <text x="80" y="226" text-anchor="middle">signals</text>
+            <text x="275" y="70" text-anchor="middle">model update</text>
+            <text x="516" y="86" text-anchor="middle">action</text>
+            <text x="410" y="216" text-anchor="middle" font-style="italic" opacity="0.75">consequence</text>
+          </g>
+        </svg>
+        <figcaption><span class="fignum">Figure 2.</span> The activation filter: of everything a system receives,
+        only what updates the model — and thereby the action — counts as knowledge. Consequences feed the next
+        update.</figcaption>
+      </figure>
+
+      <h2 id="why-it-matters"><a class="anchor" href="#why-it-matters">#</a>Why it matters</h2>
+
+      <p>Put survival at the bottom of the stack and the rest of the framework follows. Life, organizations, and
+      civilizations are sequential decision-making systems. Their shared objective is persistence — the
+      maintenance of organization against entropy — and their shared method is the accumulation of knowledge that
+      improves action under uncertainty. Every later factor is a consequence of this one: language exists to
+      compress and carry knowledge between systems, action is knowledge's only route to value, and capital is how
+      networks keep score of who has converted knowing into consequence.</p>
+    </article>
+
+    <div class="related" data-note="related factors — :::related directive">
+      <h2>Related factors</h2>
+      <a href="#"><span><span class="r-title">Factor 2 — Language Compresses and Carries Knowledge</span><br /><span class="r-why">How the order described here survives transmission</span></span>
+        <svg class="r-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a href="#"><span><span class="r-title">Factor 5 — Action is the Only Causal Chain to Survival</span><br /><span class="r-why">The activation standard, taken to its conclusion</span></span>
+        <svg class="r-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a href="#"><span><span class="r-title">Factor 9 — Capital is a Path-Dependent Scoring System</span><br /><span class="r-why">How networks keep score of activated knowledge</span></span>
+        <svg class="r-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="canonical" data-note="canonical manifesto paragraph — verbatim, shared with README">
+      <span class="label">The factor, in full</span>
+      <p>Knowledge is not mere information but information that enables effective action. Information
+      theory<sup>1</sup> formalizes information as the reduction of uncertainty, but explicitly notes that
+      semantic aspects are irrelevant to the engineering problem. Cybernetics<sup>2</sup> sought something deeper,
+      the negative entropy of order that maintains organization. The distinction matters, because all knowledge is
+      information but not all information is knowledge. A random bitstream has high Shannon information yet
+      teaches nothing. A signal that updates your model of reality and improves your decisions is knowledge. The
+      information value theory<sup>5</sup> makes this precise. Information has worth only insofar as it changes
+      what you would do. Agents under incomplete state information reduce uncertainty through
+      observation<sup>3</sup>, a framework later developed into partially observable Markov decision
+      processes<sup>4</sup>. Life, organizations, and civilizations are fundamentally sequential decision-making
+      systems. Their objective is survival, the maintenance of organization against entropy, and they pursue it by
+      accumulating knowledge that improves their capacity to act under uncertainty.</p>
+    </div>
+
+    <div class="refs" data-note="references — generated by rehype-citation from references.bib">
+      <h2>References</h2>
+      <ol>
+        <li>Shannon, C.&nbsp;E. 1948. <a class="textlink" href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf">"A Mathematical Theory of Communication."</a> <span class="r-title-i">Bell System Technical Journal</span> 27: 379–423, 623–656.</li>
+        <li>Wiener, N. 1948. <a class="textlink" href="https://uberty.org/wp-content/uploads/2015/07/Norbert_Wiener_Cybernetics.pdf"><span class="r-title-i">Cybernetics: Or Control and Communication in the Animal and the Machine.</span></a> Cambridge, MA: MIT Press.</li>
+        <li>Åström, K.&nbsp;J. 1965. <a class="textlink" href="https://lup.lub.lu.se/search/files/5323668/8867085.pdf">"Optimal Control of Markov Processes with Incomplete State Information."</a> <span class="r-title-i">Journal of Mathematical Analysis and Applications</span> 10 (1): 174–205.</li>
+        <li>Kaelbling, L.&nbsp;P., M.&nbsp;L. Littman, and A.&nbsp;R. Cassandra. 1998. <a class="textlink" href="https://people.csail.mit.edu/lpk/papers/aij98-pomdp.pdf">"Planning and Acting in Partially Observable Stochastic Domains."</a> <span class="r-title-i">Artificial Intelligence</span> 101 (1–2): 99–134.</li>
+        <li>Howard, R.&nbsp;A. 1966. <a class="textlink" href="https://doi.org/10.1109/TSSC.1966.300074">"Information Value Theory."</a> <span class="r-title-i">IEEE Transactions on Systems Science and Cybernetics</span> 2 (1): 22–26.</li>
+      </ol>
+    </div>
+
+    <div class="pager" data-note="prev/next — native CSS view transitions between factor pages">
+      <span></span>
+      <a href="#">
+        <span style="text-align:right"><span class="dir">Next</span><span class="p-title">Factor 2: Language Compresses and Carries Knowledge</span></span>
+        <svg class="next" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+  </div>
+
+  <details class="impl-map">
+    <summary>Implementation map (mockup element → planned tooling)</summary>
+    <table>
+      <tr><td>Breadcrumb, epigraph</td><td>frontmatter schema additions (factor, part, principle) + page template</td></tr>
+      <tr><td>In brief, related factors</td><td>remark-directive blocks (:::brief, :::related) + ~80-line mapping plugin</td></tr>
+      <tr><td>Citation sidenotes</td><td>rehype-citation ([@key] + references.bib) + Tufte sidenote rehype transform; checkbox toggle under 1280px</td></tr>
+      <tr><td>Section anchors</td><td>rehype-slug + rehype-autolink-headings</td></tr>
+      <tr><td>Figures + captions</td><td>Figure.astro (currentColor SVG, figcaption slot); reveal via CSS animation-timeline: view()</td></tr>
+      <tr><td>Glossary popover</td><td>native Popover API + glossary data file (zero JS)</td></tr>
+      <tr><td>Reading progress</td><td>CSS animation-timeline: scroll() (zero JS)</td></tr>
+      <tr><td>References</td><td>generated by rehype-citation, Chicago author-date</td></tr>
+      <tr><td>Canonical paragraph</td><td>verbatim manifesto text, shared with README</td></tr>
+      <tr><td>Prev/next transitions</td><td>native CSS @view-transition (cross-page; not demoable in a single file)</td></tr>
+    </table>
+  </details>
+</main>
+
+<footer>© 2026 | 12 Factors of Knowledge Capitalism — design mockup, not deployed</footer>
+
+<script>
+  const themeBtn = document.getElementById("theme-btn");
+  themeBtn.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+  });
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.classList.add("dark");
+  }
+
+  const annotateBtn = document.getElementById("annotate-btn");
+  annotateBtn.addEventListener("click", () => {
+    const on = document.body.classList.toggle("annotate");
+    annotateBtn.setAttribute("aria-pressed", String(on));
+  });
+</script>
+</body>
+</html>
