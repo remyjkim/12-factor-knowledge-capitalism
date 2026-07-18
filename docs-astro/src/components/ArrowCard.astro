@@ -6,9 +6,16 @@ type Props = {
 }
 
 const { entry } = Astro.props;
+const factor = entry.data.factor ?? parseInt(entry.slug.split("-")[0], 10);
+const factorLabel = Number.isFinite(factor) ? String(factor).padStart(2, "0") : null;
 ---
 
-<a href={`/${entry.collection}/${entry.slug}`} class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+<a href={`/${entry.collection}/${entry.slug}`} class="relative group flex flex-nowrap items-start gap-3 py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+  {factorLabel && (
+    <div class="font-mono text-xs pt-1 text-black/35 dark:text-white/35 group-hover:text-black/60 dark:group-hover:text-white/60 transition-colors duration-300">
+      {factorLabel}
+    </div>
+  )}
   <div class="flex flex-col flex-1 truncate">
     <div class="font-semibold">
       {entry.data.title}
