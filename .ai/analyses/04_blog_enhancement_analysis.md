@@ -190,8 +190,11 @@ Supporting schema/template changes (small):
 The site's dark mode is class-toggled (`html.dark`), not media-query. Inline
 `currentColor` SVGs adapt for free — this is a real advantage of the current
 system. Raster exports don't; using foundry for in-article figures requires a
-light/dark variant pair per figure (a `theme` input on the creator, two
-exports) embedded as:
+light/dark variant pair per figure. Foundry's own docs sanction the mechanism:
+`docs/guides/03_interactive_html_figures.md` defines serializable export
+presets selected via URL search params, so a creator can expose
+`presets = { light: {...}, dark: {...} }` and the export script captures both.
+The pair embeds as:
 
 ```html
 <img src="/figures/f9-disclosure-light.webp" class="dark:hidden" … />
@@ -224,7 +227,9 @@ Alt text must live in the markdown (raster loses the SVG `<title>/<desc>`).
 
 4. **Mermaid/D2 build-time diagrams** — rejected: generic look would break the
    site's visual system, and the diagrams needed are compositional, not
-   graph-layout.
+   graph-layout. Foundry's target architecture doc reaches the same conclusion
+   for its own scope ("no Mermaid or graph-layout engine as a default;
+   hand-tuned fixed-canvas scenes remain the default for editorial figures").
 
 **Recommendation: hybrid.**
 - In-article figures stay **inline SVG** (theme-adaptive, accessible), but
