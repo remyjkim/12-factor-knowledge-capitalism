@@ -1,0 +1,407 @@
+<!-- ABOUTME: Self-contained visual mockup of the redesigned homepage for knowledgecapitalism.com. -->
+<!-- ABOUTME: Shows the framework-map hero, restructured intro, part descriptions, numbered cards, and cite-this block with an annotation toggle for review. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>12 Factors of Knowledge Capitalism — homepage target design mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f5f5f4;
+    --bg-elev: #fafaf9;
+    --ink: #1c1917;
+    --body: #3f3a36;
+    --muted: #78716c;
+    --faint: #a8a29e;
+    --hairline: rgba(28, 25, 23, 0.14);
+    --hairline-soft: rgba(28, 25, 23, 0.08);
+    --tint: rgba(28, 25, 23, 0.033);
+    --review: #b45309;
+  }
+  html.dark {
+    --bg: #1c1917;
+    --bg-elev: #24211e;
+    --ink: #fafaf9;
+    --body: #d6d3d1;
+    --muted: #a8a29e;
+    --faint: #78716c;
+    --hairline: rgba(250, 250, 249, 0.16);
+    --hairline-soft: rgba(250, 250, 249, 0.09);
+    --tint: rgba(250, 250, 249, 0.045);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--body);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 1.1rem 1.25rem;
+    background: color-mix(in srgb, var(--bg) 75%, transparent);
+    backdrop-filter: blur(8px) saturate(2);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .site-name { font-size: 0.875rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+  .header-tools { display: flex; gap: 0.4rem; }
+  .tool-btn {
+    font: 500 0.7rem/1 "Inter", sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); background: none; border: 1px solid var(--hairline);
+    border-radius: 999px; padding: 0.42rem 0.8rem; cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tool-btn:hover { color: var(--ink); border-color: var(--muted); }
+  .tool-btn[aria-pressed="true"] { color: var(--review); border-color: var(--review); }
+
+  main { padding: 7.5rem 1.25rem 4rem; }
+  .col { max-width: 40rem; margin: 0 auto; }
+
+  h1 {
+    font-family: "Inter", sans-serif; font-weight: 600; color: var(--ink);
+    font-size: 1.9rem; line-height: 1.22; letter-spacing: -0.015em;
+    margin: 0 0 0.9rem;
+  }
+  .definition {
+    font-family: "Lora", Georgia, serif; font-style: italic; font-weight: 500;
+    font-size: 1.22rem; line-height: 1.6; color: var(--ink); margin: 0 0 2.75rem;
+  }
+
+  /* ---- framework map ---- */
+  figure.map { margin: 0 0 1.2rem; }
+  figure.map svg { width: 100%; height: auto; display: block; color: var(--body); }
+  figure.map figcaption {
+    margin-top: 0.9rem; font-size: 0.8rem; line-height: 1.55; color: var(--muted);
+  }
+  .map a { color: inherit; text-decoration: none; }
+  .map a:hover text { fill: var(--ink); opacity: 1; }
+  .map .part-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    fill: currentColor; opacity: 0.55;
+  }
+  .map .node-num { font-size: 12px; font-weight: 600; fill: currentColor; }
+  .map .node-label { font-size: 11.5px; fill: currentColor; opacity: 0.75; }
+
+  /* ---- begin CTA ---- */
+  .begin {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    margin: 0 0 3.2rem; flex-wrap: wrap;
+  }
+  .begin a {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.92rem; font-weight: 500; color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--hairline); padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .begin a:hover { border-color: var(--ink); }
+  .begin a svg { transition: transform 0.2s; }
+  .begin a:hover svg { transform: translateX(3px); }
+  .begin .size { font-size: 0.78rem; color: var(--faint); }
+
+  /* ---- intro ---- */
+  .lede {
+    font-family: "Lora", Georgia, serif; font-size: 1.04rem; line-height: 1.8;
+    margin: 0 0 1.6rem; color: var(--body);
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+  .inbrief {
+    margin: 0 0 1.4rem; padding: 1.35rem 1.5rem 1.45rem;
+    border: 1px solid var(--hairline); border-radius: 8px; background: var(--tint);
+  }
+  .inbrief .label {
+    display: block; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--faint); margin-bottom: 0.7rem;
+  }
+  .inbrief ul { margin: 0; padding: 0 0 0 1.1rem; }
+  .inbrief li { font-size: 0.92rem; line-height: 1.65; margin: 0.55rem 0; }
+  .inbrief b { color: var(--ink); font-weight: 600; }
+  .inbrief a { color: inherit; text-decoration: underline; text-underline-offset: 2.5px; text-decoration-color: var(--hairline); }
+  .inbrief a:hover { color: var(--ink); text-decoration-color: var(--muted); }
+  .credit {
+    font-size: 0.78rem; color: var(--faint); margin: 0 0 3.6rem;
+  }
+  .credit a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+  .credit a:hover { color: var(--ink); }
+
+  /* ---- factor sections ---- */
+  .toc-title {
+    font-size: 1.05rem; font-weight: 600; color: var(--ink); margin: 0 0 1.6rem;
+  }
+  .part { margin: 0 0 2.4rem; }
+  .part h3 {
+    font-size: 1.02rem; font-weight: 600; color: var(--ink); margin: 0 0 0.15rem;
+    scroll-margin-top: 6rem;
+  }
+  .part .part-desc {
+    font-family: "Lora", Georgia, serif; font-style: italic;
+    font-size: 0.88rem; color: var(--muted); margin: 0 0 0.9rem;
+  }
+  .card {
+    display: flex; align-items: flex-start; gap: 0.8rem; position: relative;
+    border: 1px solid var(--hairline); border-radius: 8px;
+    padding: 0.8rem 2.4rem 0.8rem 1rem; margin: 0.55rem 0; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .card:hover { border-color: var(--muted); background: var(--tint); }
+  .card .chip {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.72rem;
+    color: var(--faint); padding-top: 0.22rem; transition: color 0.2s;
+  }
+  .card:hover .chip { color: var(--ink); }
+  .card .c-title { font-size: 0.92rem; font-weight: 600; color: var(--ink); }
+  .card .c-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.12rem; line-height: 1.5; }
+  .card .c-arrow {
+    position: absolute; right: 0.85rem; top: 50%; transform: translateY(-50%);
+    color: var(--faint); transition: transform 0.2s, color 0.2s;
+  }
+  .card:hover .c-arrow { transform: translateY(-50%) translateX(3px); color: var(--ink); }
+  .seq-note {
+    font-size: 0.8rem; color: var(--faint); font-style: italic; margin: 1.6rem 0 0;
+  }
+
+  /* ---- cite-this ---- */
+  .cite {
+    margin: 3.6rem 0 0; padding: 1.5rem 1.7rem 1.6rem;
+    border-left: 2px solid var(--hairline); background: var(--tint); border-radius: 0 10px 10px 0;
+  }
+  .cite .label {
+    display: block; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--faint); margin-bottom: 0.8rem;
+  }
+  .cite p { font-size: 0.85rem; line-height: 1.6; color: var(--body); margin: 0 0 1rem; }
+  .cite pre {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.74rem;
+    line-height: 1.55; color: var(--muted); background: var(--bg-elev);
+    border: 1px solid var(--hairline-soft); border-radius: 6px;
+    padding: 0.9rem 1.1rem; margin: 0; overflow-x: auto; white-space: pre;
+  }
+
+  footer { padding: 2.5rem 1.25rem; text-align: center; font-size: 0.75rem; color: var(--faint); }
+
+  /* ---- review annotations (mockup chrome) ---- */
+  [data-note] { position: relative; }
+  body.annotate [data-note] { outline: 1px dashed var(--review); outline-offset: 5px; }
+  body.annotate [data-note]::after {
+    content: attr(data-note);
+    position: absolute; top: -1.15rem; right: 0;
+    font: 500 0.62rem/1 "Inter", sans-serif; letter-spacing: 0.04em;
+    color: var(--review); background: var(--bg); border: 1px dashed var(--review);
+    border-radius: 3px; padding: 2px 6px; z-index: 40; white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<header>
+  <a class="site-name" href="#">12 Factors of Knowledge Capitalism</a>
+  <div class="header-tools">
+    <button class="tool-btn" id="annotate-btn" aria-pressed="false">Annotations</button>
+    <button class="tool-btn" id="theme-btn">Theme</button>
+  </div>
+</header>
+
+<main>
+  <div class="col">
+
+    <h1>12 Factors of Knowledge Capitalism</h1>
+    <p class="definition" data-note="one-line definition — replaces two dense intro paragraphs as the opener">A framework for how knowledge creates, compounds, and captures value in networked systems.</p>
+
+    <figure class="map" data-note="framework map hero — replaces hand-in-hand.jpeg">
+      <svg viewBox="0 0 640 480" role="img" aria-labelledby="map-t map-d" fill="none" stroke="currentColor">
+        <title id="map-t">The architecture of the twelve factors</title>
+        <desc id="map-d">Foundations at the top feed three parallel interfaces — evolution, agency, and network — which converge into the knowledge capitalism layer of capital, market, coordination, and mechanism design. A dashed arrow closes the loop from mechanism design back to the foundations.</desc>
+
+        <text x="320" y="24" text-anchor="middle" class="part-label">I · Foundations</text>
+        <g stroke="currentColor" stroke-width="1.8">
+          <circle cx="270" cy="62" r="15"/><circle cx="370" cy="62" r="15"/>
+        </g>
+        <path d="M285 62 H355" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
+        <text x="270" y="66" text-anchor="middle" class="node-num" stroke="none">1</text>
+        <text x="370" y="66" text-anchor="middle" class="node-num" stroke="none">2</text>
+        <text x="270" y="98" text-anchor="middle" class="node-label" stroke="none">knowledge</text>
+        <text x="370" y="98" text-anchor="middle" class="node-label" stroke="none">language</text>
+
+        <path d="M320 80 V112" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
+        <path d="M120 112 H520" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
+        <g stroke="currentColor" stroke-width="1.4" opacity="0.55" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M120 112 V134"/><path d="M114 126 L120 138 L126 126"/>
+          <path d="M320 112 V134"/><path d="M314 126 L320 138 L326 126"/>
+          <path d="M520 112 V134"/><path d="M514 126 L520 138 L526 126"/>
+        </g>
+
+        <text x="120" y="162" text-anchor="middle" class="part-label">II · Evolution</text>
+        <text x="320" y="162" text-anchor="middle" class="part-label">III · Agency</text>
+        <text x="520" y="162" text-anchor="middle" class="part-label">IV · Network</text>
+
+        <g stroke="currentColor" stroke-width="1.8">
+          <circle cx="120" cy="196" r="15"/><circle cx="120" cy="268" r="15"/>
+          <circle cx="320" cy="196" r="15"/><circle cx="320" cy="268" r="15"/>
+          <circle cx="520" cy="196" r="15"/><circle cx="520" cy="268" r="15"/>
+        </g>
+        <g stroke="currentColor" stroke-width="1.2" opacity="0.5">
+          <path d="M120 211 V253"/><path d="M320 211 V253"/><path d="M520 211 V253"/>
+        </g>
+        <g stroke="none" fill="currentColor">
+          <text x="120" y="200" text-anchor="middle" class="node-num">3</text>
+          <text x="120" y="272" text-anchor="middle" class="node-num">4</text>
+          <text x="320" y="200" text-anchor="middle" class="node-num">5</text>
+          <text x="320" y="272" text-anchor="middle" class="node-num">6</text>
+          <text x="520" y="200" text-anchor="middle" class="node-num">7</text>
+          <text x="520" y="272" text-anchor="middle" class="node-num">8</text>
+        </g>
+        <g stroke="none" fill="currentColor">
+          <text x="152" y="200" text-anchor="start" class="node-label">explore</text>
+          <text x="152" y="272" text-anchor="start" class="node-label">criticize</text>
+          <text x="352" y="200" text-anchor="start" class="node-label">act</text>
+          <text x="352" y="272" text-anchor="start" class="node-label">embody</text>
+          <text x="488" y="200" text-anchor="end" class="node-label">transmit</text>
+          <text x="488" y="272" text-anchor="end" class="node-label">align</text>
+        </g>
+
+        <g stroke="currentColor" stroke-width="1.4" opacity="0.55" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M120 283 V310 H320 M520 283 V310 H320"/>
+          <path d="M320 310 V330"/><path d="M314 322 L320 334 L326 322"/>
+        </g>
+
+        <text x="320" y="360" text-anchor="middle" class="part-label">V · Knowledge Capitalism</text>
+        <g stroke="currentColor" stroke-width="1.8">
+          <circle cx="110" cy="398" r="15"/><circle cx="250" cy="398" r="15"/><circle cx="390" cy="398" r="15"/><circle cx="530" cy="398" r="15"/>
+        </g>
+        <g stroke="currentColor" stroke-width="1.2" opacity="0.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M125 398 H235"/><path d="M229 392 L237 398 L229 404"/>
+          <path d="M265 398 H375"/><path d="M369 392 L377 398 L369 404"/>
+          <path d="M405 398 H515"/><path d="M509 392 L517 398 L509 404"/>
+        </g>
+        <g stroke="none" fill="currentColor">
+          <text x="110" y="402" text-anchor="middle" class="node-num">9</text>
+          <text x="250" y="402" text-anchor="middle" class="node-num">10</text>
+          <text x="390" y="402" text-anchor="middle" class="node-num">11</text>
+          <text x="530" y="402" text-anchor="middle" class="node-num">12</text>
+          <text x="110" y="434" text-anchor="middle" class="node-label">capital</text>
+          <text x="250" y="434" text-anchor="middle" class="node-label">market</text>
+          <text x="390" y="434" text-anchor="middle" class="node-label">coordination</text>
+          <text x="530" y="434" text-anchor="middle" class="node-label">design</text>
+        </g>
+
+        <path d="M545 386 C620 300 620 130 393 58" stroke="currentColor" stroke-width="1.1" stroke-dasharray="4 6" opacity="0.45" fill="none"/>
+        <g stroke="currentColor" stroke-width="1.1" opacity="0.45" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M408 52 L389 57 L400 70"/>
+        </g>
+        <text x="628" y="230" text-anchor="middle" class="node-label" stroke="none" font-style="italic" opacity="0.55" transform="rotate(90 628 230)">the loop closes</text>
+      </svg>
+      <figcaption><strong style="color: var(--ink); font-weight: 600;">The architecture.</strong> Foundations feed three interfaces — how knowledge evolves, acts, and moves — and everything converges into the economic layer, whose mechanisms feed discovery again.</figcaption>
+    </figure>
+
+    <div class="begin" data-note="entry affordance — sequential reading CTA">
+      <a href="#">
+        Begin with Factor 1
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
+      </a>
+      <span class="size">twelve factors · read in sequence · ~60 minutes</span>
+    </div>
+
+    <p class="lede" data-note="manifesto lede — two sentences, was two dense paragraphs">Beneath every factor lies a single objective: <strong>survival under uncertainty</strong> — the maintenance of organization against entropy. Knowledge exists in service of action, and action in service of persistence.</p>
+
+    <div class="inbrief" data-note="in-brief box — same component language as factor pages">
+      <span class="label">In brief</span>
+      <ul>
+        <li>The <b>objective</b> is survival under uncertainty: systems persist by converting what they know into better decisions. <a href="#">Factor 1</a> sets this standard.</li>
+        <li>The <b>method</b> is <b>knowledge activation</b> — the conversion of what is known into effective action wherever it is needed, through the interfaces of evolution, agency, and network.</li>
+        <li>The <b>claim</b> is that knowledge itself becomes the primary form of capital — <b>cognitive capital</b> (<a href="#">Factor 9</a>) — and civilization's task is designing the mechanisms that maximize its liquidity (<a href="#">Factor 12</a>).</li>
+      </ul>
+    </div>
+
+    <p class="credit" data-note="credit line — demoted from opening position">Inspired by the original <a href="https://12factor.net/">12-Factor App</a> and <a href="https://github.com/humanlayer/12-factor-agents">12-Factor Agents</a>.</p>
+
+    <h2 class="toc-title">The 12 Factors</h2>
+
+    <section class="part" id="part-1" data-note="part heading + one-line role description">
+      <h3>I. Foundations</h3>
+      <p class="part-desc">what knowledge is, and how it is carried</p>
+      <a class="card" href="#"><span class="chip">01</span><span><span class="c-title">Knowledge is Negative Entropy</span><br /><span class="c-desc">Knowledge is not mere information but information that enables effective action.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a class="card" href="#"><span class="chip">02</span><span><span class="c-title">Language Compresses and Carries Knowledge</span><br /><span class="c-desc">Among all the vessels humanity has invented to carry knowledge, language remains the most versatile.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+    </section>
+
+    <section class="part" id="part-2">
+      <h3>II. The Evolution Interface</h3>
+      <p class="part-desc">how conjecture and criticism create it</p>
+      <a class="card" href="#"><span class="chip">03</span><span><span class="c-title">Exploration Creates New Conjectures</span><br /><span class="c-desc">Knowledge is not deduced but created, beginning as a bold and creative guess at how reality works.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a class="card" href="#"><span class="chip">04</span><span><span class="c-title">Criticism Hardens Conjecture into Knowledge</span><br /><span class="c-desc">A conjecture is not yet knowledge. It earns that status only by surviving criticism.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+    </section>
+
+    <section class="part" id="part-3">
+      <h3>III. The Agency Interface</h3>
+      <p class="part-desc">how it converts into action</p>
+      <a class="card" href="#"><span class="chip">05</span><span><span class="c-title">Action is the Only Causal Chain to Survival</span><br /><span class="c-desc">Agency is the groundwork on which knowledge earns its consequence.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a class="card" href="#"><span class="chip">06</span><span><span class="c-title">Cognitive Actors Are the Nodes of Agency</span><br /><span class="c-desc">A cognitive actor is any system, carbon or silicon, that turns signals into actions toward an objective.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+    </section>
+
+    <section class="part" id="part-4">
+      <h3>IV. The Network Interface</h3>
+      <p class="part-desc">how it moves between actors</p>
+      <a class="card" href="#"><span class="chip">07</span><span><span class="c-title">Transmission Adds Context and Noise to the Core Message</span><br /><span class="c-desc">Knowledge cannot traverse networks without context, and transmission never arrives clean.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a class="card" href="#"><span class="chip">08</span><span><span class="c-title">Shared Structures Enable Coordination at Scale</span><br /><span class="c-desc">Coordination needs shared belief systems and the structures that sustain them.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+    </section>
+
+    <section class="part" id="part-5">
+      <h3>V. Knowledge Capitalism</h3>
+      <p class="part-desc">how networks score, trade, and design for it</p>
+      <a class="card" href="#"><span class="chip">09</span><span><span class="c-title">Capital is a Path-Dependent Scoring System</span><br /><span class="c-desc">Once networked actors share structures, they begin to score, and that scoring is capital.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a class="card" href="#"><span class="chip">10</span><span><span class="c-title">The Market is a Knowledge-Utilization Machine</span><br /><span class="c-desc">A market is not merely a place to trade. It is a machine for utilizing knowledge no single mind holds.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a class="card" href="#"><span class="chip">11</span><span><span class="c-title">Coordination Mechanisms Scale Civilization</span><br /><span class="c-desc">How an entire civilization puts its dispersed knowledge to work: coordination mechanisms.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a class="card" href="#"><span class="chip">12</span><span><span class="c-title">Mechanism Design and the Tools to Maximize Welfare</span><br /><span class="c-desc">Welfare does not arise on its own. It must be engineered, and a growing toolkit makes it possible.</span></span>
+        <svg class="c-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></a>
+    </section>
+
+    <p class="seq-note">Read sequentially — each factor builds on the last, and the twelfth closes the loop.</p>
+
+    <div class="cite" data-note="cite-this block — author name placeholder, confirm before implementing">
+      <span class="label">Cite this manifesto</span>
+      <p>Kim, R. (2026). <em>The 12 Factors of Knowledge Capitalism.</em> https://knowledgecapitalism.com</p>
+      <pre>@misc{kim2026knowledgecapitalism,
+  author       = {Kim, Remy},
+  title        = {The 12 Factors of Knowledge Capitalism},
+  year         = {2026},
+  howpublished = {\url{https://knowledgecapitalism.com}}
+}</pre>
+    </div>
+
+  </div>
+</main>
+
+<footer>© 2026 | 12 Factors of Knowledge Capitalism — design mockup, not deployed</footer>
+
+<script>
+  document.getElementById("theme-btn").addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+  });
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.classList.add("dark");
+  }
+  const annotateBtn = document.getElementById("annotate-btn");
+  annotateBtn.addEventListener("click", () => {
+    const on = document.body.classList.toggle("annotate");
+    annotateBtn.setAttribute("aria-pressed", String(on));
+  });
+</script>
+</body>
+</html>
