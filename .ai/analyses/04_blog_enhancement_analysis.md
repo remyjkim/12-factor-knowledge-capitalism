@@ -190,11 +190,17 @@ Supporting schema/template changes (small):
 The site's dark mode is class-toggled (`html.dark`), not media-query. Inline
 `currentColor` SVGs adapt for free — this is a real advantage of the current
 system. Raster exports don't; using foundry for in-article figures requires a
-light/dark variant pair per figure. Foundry's own docs sanction the mechanism:
-`docs/guides/03_interactive_html_figures.md` defines serializable export
-presets selected via URL search params, so a creator can expose
-`presets = { light: {...}, dark: {...} }` and the export script captures both.
-The pair embeds as:
+light/dark variant pair per figure. Foundry has **no theming system today** —
+no CSS variables, no media queries; each creator hardcodes its palette in
+local CSS. The documented preset pattern
+(`docs/guides/03_interactive_html_figures.md`) covers *data* variants
+(`{ columns, density }`), and the architecture doc extends presets to aspect
+ratios — so a `theme` preset selected via URL param is a natural extension a
+blog creator would add, but it is something we build, not something foundry
+ships. Two related gaps foundry itself documents: no font-loading strategy
+(a blog-matched family must preload Inter/Lora in its HTML entry), and Scalon
+brand assets are baked into `integrations-diagram` with no replacement guide.
+The exported pair embeds as:
 
 ```html
 <img src="/figures/f9-disclosure-light.webp" class="dark:hidden" … />
