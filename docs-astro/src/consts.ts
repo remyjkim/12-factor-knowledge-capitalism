@@ -13,7 +13,7 @@ export const HOME: Metadata = {
 
 export const BLOG: Metadata = {
   TITLE: "The 12 Factors",
-  DESCRIPTION: "Twelve foundational principles describing the architecture of an economy where knowledge itself becomes the primary form of capital.",
+  DESCRIPTION: "Twelve foundational principles describing the architecture of an economy where the capacity to activate knowledge becomes the primary form of capital.",
 };
 
 export const SOCIALS: Socials = [
