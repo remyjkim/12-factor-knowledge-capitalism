@@ -37,6 +37,15 @@ warehouse is a poor asset; the capability is what networks can score).
 4. Companion coinages stay as they are: **knowledge activation** (the
    objective function, defined in Factor 1), **knowledge liquidity** (what
    mechanisms maximize, Factor 12). Neither is an asset word.
+5. **Activation physics** (settled 2026-07): knowledge by itself is inert;
+   activation combines knowledge with **compute and energy**. The standard
+   prose phrasing is "compute and energy" (not "work"), with thermodynamic
+   precision carried by the Factor 1 citations (Szilard 1929, Landauer 1961,
+   Schrödinger 1944). Primary exposition lives in Factor 1's mechanism
+   section; one-sentence echoes in Factors 5 and 6 and the homepage method
+   bullet. The canonical manifesto paragraphs do NOT yet carry this
+   amendment — extending the README manifesto text is a separate, pending
+   editorial decision of Remy's.
 
 ## External-literature collisions (why the names are what they are)
 

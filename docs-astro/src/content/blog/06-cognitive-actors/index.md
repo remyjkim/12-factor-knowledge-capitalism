@@ -15,7 +15,7 @@ principle: "A cognitive actor is any system — carbon or silicon — that conve
 
 ## The claim
 
-A cognitive actor is any system, carbon or silicon, that processes signals and converts them into actions or plans in pursuit of an objective. The definition is deliberately functional: it says nothing about neurons, consciousness, or personhood. Whatever can perceive, decide, and act toward a goal qualifies — a person, a firm, a trained model, a person wielding a model. By this definition, the fundamental unit of agency in a knowledge system is not a person but a *capability*.
+A cognitive actor is any system, carbon or silicon, that processes signals and converts them into actions or plans in pursuit of an objective. The definition is deliberately functional: it says nothing about neurons, consciousness, or personhood. Whatever can perceive, decide, and act toward a goal qualifies — a person, a firm, a trained model, a person wielding a model. By this definition, the fundamental unit of agency in a knowledge system is not a person but a *capability*. And a capability is a physical thing: the cognitive actor is where knowledge, compute, and energy co-locate — a twenty-watt brain or a megawatt datacenter. Without the watts, the knowing cannot act.
 
 Within each actor, the two interfaces already described meet. The beliefs and frameworks refined by the evolution interface are the linkage that couples it to the agency interface: evolution learns, agency acts, and the cognitive actor is where the two are joined in one system. And each actor is monad-like — a seeker carrying its own view of the world, reasoning within its own beliefs, frameworks, and plans. No two model reality identically.
 

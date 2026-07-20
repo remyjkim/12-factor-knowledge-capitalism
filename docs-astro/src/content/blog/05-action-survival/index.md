@@ -15,7 +15,7 @@ principle: "Knowledge earns its consequence only through action — belief, fram
 
 ## The claim
 
-Action against reality is the only causal chain toward survival. A system can perceive perfectly, model beautifully, and know truly — and none of it touches the world until it *does* something. Agency is the groundwork on which knowledge earns its consequence, and in economic terms it is where value is created or captured: the point where knowing converts into doing.
+Action against reality is the only causal chain toward survival. A system can perceive perfectly, model beautifully, and know truly — and none of it touches the world until it *does* something. And doing is physical: the arrow from knowing to acting is a powered arrow, paid for in compute and energy. Agency is the groundwork on which knowledge earns its consequence, and in economic terms it is where value is created or captured: the point where knowing converts into doing.
 
 The conversion runs through the agency interface: the beliefs we hold, the frameworks we reason within, and the action plans we commit to in making sequential decisions. Belief is the linchpin. Peirce defined it as the settled state that guides action — the cessation of doubt that permits commitment.[^1] An agent that cannot settle cannot commit, and an agent that cannot commit cannot act.
 

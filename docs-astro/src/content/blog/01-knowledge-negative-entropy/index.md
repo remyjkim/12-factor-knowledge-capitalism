@@ -9,7 +9,7 @@ principle: "Knowledge is information that enables effective action — the order
 
 :::brief
 - All knowledge is information, but almost no information is knowledge. A signal counts as knowledge only when it improves your capacity to act.
-- Living systems — organisms, firms, civilizations — persist by converting signals into better decisions, maintaining order against entropy.
+- Living systems — organisms, firms, civilizations — persist by converting signals into better decisions, maintaining order against entropy — an order that is paid for in energy.
 - It follows that knowledge is measured by consequence, not content: its value is exactly the improvement in action it makes possible.
 :::
 
@@ -61,10 +61,12 @@ How does information become knowledge? Through a decision. An agent — a cell, 
 
 This is the standard the rest of the framework inherits, and it has a name here: <button class="term" popovertarget="def-ka">knowledge activation</button>. Knowledge realizes value only when it converts into effective action — somewhere, by someone. A library that no decision ever touches is, economically, indistinguishable from noise.
 
+The standard has physical fine print. Knowledge by itself is inert — structure that changes nothing until something runs it. Szilard drew the picture a century ago: one bit of information about a molecule can be converted into work, but only by running an engine.[^6] The bit alone extracts nothing. Computation — the running — carries its own irreducible energy cost,[^7] and living systems hold their order only by feeding on energy gradients.[^8] So activation is a three-part event: knowledge, combined with **compute and energy**, becomes impact. Leave out the watts and the second law returns the knowledge to the shelf — potential, priced at nothing.
+
 <figure class="fig">
-<svg viewBox="0 0 640 260" role="img" aria-labelledby="f1b-t f1b-d" fill="none" stroke="currentColor">
+<svg viewBox="0 0 640 300" role="img" aria-labelledby="f1b-t f1b-d" fill="none" stroke="currentColor">
   <title id="f1b-t">The activation filter</title>
-  <desc id="f1b-d">Many incoming signals reach a model, which updates and drives an action; a dashed consequence loop feeds back from the action to the model.</desc>
+  <desc id="f1b-d">Many incoming signals reach a model, which updates and drives an action; a dashed consequence loop feeds back from the action to the model, and a power feed labelled compute and energy enters the model from below.</desc>
   <g fill="currentColor" stroke="none" opacity="0.75">
     <circle cx="52" cy="66" r="3.5"/><circle cx="84" cy="98" r="3.5"/><circle cx="48" cy="128" r="3.5"/>
     <circle cx="90" cy="152" r="3.5"/><circle cx="60" cy="182" r="3.5"/><circle cx="112" cy="70" r="3.5"/>
@@ -88,14 +90,20 @@ This is the standard the rest of the framework inherits, and it has a name here:
   <g stroke="currentColor" stroke-width="1.3" opacity="0.55" stroke-linecap="round" stroke-linejoin="round">
     <path d="M284 194 L272 178 L292 176"/>
   </g>
+  <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.75">
+    <path d="M225 264 V228"/>
+    <path d="M225 228 L219 214 L228 214 L222 200"/>
+    <path d="M222 200 V178"/>
+  </g>
   <g fill="currentColor" stroke="none" font-size="13" opacity="0.8">
     <text x="80" y="226" text-anchor="middle">signals</text>
     <text x="275" y="70" text-anchor="middle">model update</text>
     <text x="516" y="86" text-anchor="middle">action</text>
     <text x="410" y="216" text-anchor="middle" font-style="italic" opacity="0.75">consequence</text>
+    <text x="225" y="290" text-anchor="middle">compute · energy</text>
   </g>
 </svg>
-<figcaption><strong>Figure 2.</strong> The activation filter: of everything a system receives, only what updates the model — and thereby the action — counts as knowledge. Consequences feed the next update.</figcaption>
+<figcaption><strong>Figure 2.</strong> The activation filter: of everything a system receives, only what updates the model — and thereby the action — counts as knowledge. Consequences feed the next update, and the whole conversion is powered: activation runs on compute and energy, never for free.</figcaption>
 </figure>
 
 ## Why it matters
@@ -118,11 +126,14 @@ Knowledge is not mere information but information that enables effective action.
 3. Åström, K. J. 1965. ["Optimal Control of Markov Processes with Incomplete State Information."](https://lup.lub.lu.se/search/files/5323668/8867085.pdf) *Journal of Mathematical Analysis and Applications* 10 (1): 174–205.
 4. Kaelbling, L. P., M. L. Littman, and A. R. Cassandra. 1998. ["Planning and Acting in Partially Observable Stochastic Domains."](https://people.csail.mit.edu/lpk/papers/aij98-pomdp.pdf) *Artificial Intelligence* 101 (1–2): 99–134.
 5. Howard, R. A. 1966. ["Information Value Theory."](https://doi.org/10.1109/TSSC.1966.300074) *IEEE Transactions on Systems Science and Cybernetics* 2 (1): 22–26.
+6. Szilard, L. 1929. ["On the Decrease of Entropy in a Thermodynamic System by the Intervention of Intelligent Beings."](http://fab.cba.mit.edu/classes/863.18/notes/computation/Szilard-1929.pdf) *Zeitschrift für Physik* 53: 840–856.
+7. Landauer, R. 1961. ["Irreversibility and Heat Generation in the Computing Process."](https://worrydream.com/refs/Landauer%20-%20Irreversibility%20and%20Heat%20Generation%20in%20the%20Computing%20Process.pdf) *IBM Journal of Research and Development* 5 (3): 183–191.
+8. Schrödinger, E. 1944. [*What is Life? The Physical Aspect of the Living Cell.*](http://www.whatislife.ie/downloads/What-is-Life.pdf) Cambridge: Cambridge University Press.
 :::
 
 <div popover="" id="def-ka">
 <p class="def-term">knowledge activation</p>
-<p>The conversion of what is known into effective action wherever it is needed. The framework's objective function: knowledge counts only when it acts.</p>
+<p>The conversion of what is known into effective action wherever it is needed. The framework's objective function: knowledge counts only when it acts. The conversion is physical — it runs on compute and energy, and is never free.</p>
 <a href="/">See the framework introduction</a>
 </div>
 
@@ -131,3 +142,6 @@ Knowledge is not mere information but information that enables effective action.
 [^3]: **Åström (1965)**. Optimal control with incomplete state information: the belief state as a sufficient statistic for acting.
 [^4]: **Kaelbling, Littman & Cassandra (1998)**. Partially observable Markov decision processes — planning when the world is only partly visible.
 [^5]: **Howard (1966)**, "Information Value Theory." The value of information is the value of the decision change it enables.
+[^6]: **Szilard (1929)**. One bit of information yields kT ln 2 of work — but only by running the engine. The bit alone extracts nothing.
+[^7]: **Landauer (1961)**. "Information is physical": computation carries an irreducible energy cost.
+[^8]: **Schrödinger (1944)**, *What is Life?* Organisms stay ordered by feeding on energy gradients — metabolism as the price of negative entropy.
